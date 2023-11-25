@@ -4,5 +4,5 @@ router: APIRouter = APIRouter()
 
 
 @router.get("/r", status_code=200)
-def router_root() -> dict[str:str]:
+def home():
     return {"message": "user_router ok"}

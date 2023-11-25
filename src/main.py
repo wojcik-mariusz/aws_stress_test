@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 
-from src.api.users import router as users_router
+from src.api.users.router import router as user_router
 
 app: FastAPI = FastAPI()
 
 
 @app.get("/", status_code=200)
-def read_root() -> dict[str: str]:
+def read_root():
     return {"message": "server running"}
 
 
-app.include_router(router=users_router.router)
+app.include_router(router=user_router)
