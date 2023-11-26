@@ -10,4 +10,4 @@ def read_root():
     return {"message": "server running"}
 
 
-app.include_router(router=user_router)
+app.include_router(router=user_router, tags=["users"])
