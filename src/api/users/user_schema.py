@@ -4,8 +4,6 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from pydantic import BaseModel
 
-from src.api.users.security import oauth2_scheme
-
 
 class User(BaseModel):
     username: str
