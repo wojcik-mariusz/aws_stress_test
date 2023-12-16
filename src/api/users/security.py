@@ -5,7 +5,7 @@ from src.api.users.user_db import fake_users_db
 
 from src.api.users.user_schema import User, UserInDB
 
-oauth2_scheme: OAuth2PasswordBearer = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme: OAuth2PasswordBearer = OAuth2PasswordBearer(tokenUrl="users/token")
 
 
 def fake_hash_password(password: str):
