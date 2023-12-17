@@ -1,15 +1,24 @@
 from typing import Annotated
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from jose import jwt, JWTError
 from passlib.context import CryptContext
 from pydantic import BaseModel
+from dotenv import load_dotenv
+from os import environ
+
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
 
 from src.api.users.user_db import fake_users_db
 
 from src.api.users.user_schema import User, UserInDB
 
+load_dotenv(".env")
 
-class Token (BaseModel):
+SECRET_KEY: str = environ.get("SECRET_KEY")
+ALGORITHM: str = environ.get("ALGORITHM")
+
+
+class Token(BaseModel):
     access_token: str
     token_type: str
 
