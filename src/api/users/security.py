@@ -1,15 +1,28 @@
 from typing import Annotated
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
+from passlib.context import CryptContext
+from pydantic import BaseModel
+
 from src.api.users.user_db import fake_users_db
 
 from src.api.users.user_schema import User, UserInDB
 
+
+class Token (BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: str | None = None
+
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 oauth2_scheme: OAuth2PasswordBearer = OAuth2PasswordBearer(tokenUrl="users/token")
 
 
-def fake_hash_password(password: str):
-    return "fakehashed" + password
 
 
 def get_user(db, username: str):
