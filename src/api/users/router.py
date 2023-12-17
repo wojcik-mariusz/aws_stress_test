@@ -1,3 +1,5 @@
+import datetime
+import os
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
@@ -5,7 +7,8 @@ from fastapi.security import OAuth2PasswordRequestForm
 from src.api.users.security import oauth2_scheme, get_current_user, fake_hash_password, get_current_active_user
 from src.api.users.security import User
 from src.api.users.user_db import fake_users_db
-from src.api.users.user_schema import UserInDB
+
+ACCESS_TOKEN_EXPIRE_MINUTES = os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES")
 
 router: APIRouter = APIRouter(prefix="/users")
 
