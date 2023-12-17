@@ -46,8 +46,12 @@ def get_user(db, username: str):
         return UserInDB(**user_dict)
 
 
-def fake_decode_token(token: str) -> User:
-    user = get_user(fake_users_db, token)
+def authenticate_user(db, username: str, password: str):
+    user = get_user(db, username)
+    if not user:
+        return False
+    if not verify_password(password, user.hashed_password):
+        return False
     return user
 
 
